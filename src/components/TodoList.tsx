@@ -1,9 +1,18 @@
-const TodoList: React.FC = () => {
-  const todos = [{ id: "t1", text: "Typescriptコースの完了" }];
+import "./TodoList.css";
+
+interface TodoListProps {
+  items: { id: string; text: string }[];
+  onDeleteTodo: (id: string) => void;
+}
+
+const TodoList: React.FC<TodoListProps> = (props) => {
   return (
     <ul>
-      {todos.map((todo) => (
-        <li key={todo.id}>{todo.text}</li>
+      {props.items.map((item) => (
+        <li key={item.id}>
+          <span>{item.text}</span>
+          <button onClick={props.onDeleteTodo.bind(null, item.id)}>削除</button>
+        </li>
       ))}
     </ul>
   );
